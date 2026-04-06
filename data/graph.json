@@ -1,0 +1,1591 @@
+{
+  "directed": true,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "type": "Document",
+      "description": "Documentation file: authentication.md",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/authentication.md",
+      "properties": {},
+      "id": "Authentication"
+    },
+    {
+      "type": "Endpoint",
+      "description": "API endpoint: POST /v1/api_keys/rotate",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/authentication.md",
+      "properties": {},
+      "id": "Post /V1/Api_Keys/Rotate"
+    },
+    {
+      "type": "Event",
+      "description": "Webhook event: api_key.rotated",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/authentication.md",
+      "properties": {},
+      "id": "Api_Key.Rotated"
+    },
+    {
+      "type": "APIObject",
+      "description": "",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/authentication.md",
+      "properties": {},
+      "id": "Webhook"
+    },
+    {
+      "type": "Concept",
+      "description": "",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/authentication.md",
+      "properties": {},
+      "id": "Endpoint"
+    },
+    {
+      "type": "APIObject",
+      "description": "",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/authentication.md",
+      "properties": {},
+      "id": "Customer"
+    },
+    {
+      "type": "APIObject",
+      "description": "",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/authentication.md",
+      "properties": {},
+      "id": "Charge"
+    },
+    {
+      "type": "APIObject",
+      "description": "",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/authentication.md",
+      "properties": {},
+      "id": "Subscription"
+    },
+    {
+      "type": "APIObject",
+      "description": "",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/authentication.md",
+      "properties": {},
+      "id": "Invoice"
+    },
+    {
+      "type": "APIObject",
+      "description": "",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/authentication.md",
+      "properties": {},
+      "id": "Idempotency"
+    },
+    {
+      "type": "APIObject",
+      "description": "Documentation file: pagination.md",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/authentication.md",
+      "properties": {},
+      "id": "Pagination"
+    },
+    {
+      "type": "Document",
+      "description": "Documentation file: create-charge.md",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/charges/create-charge.md",
+      "properties": {},
+      "id": "Create A Charge"
+    },
+    {
+      "type": "Endpoint",
+      "description": "API endpoint: POST /v1/charges",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/charges/create-charge.md",
+      "properties": {},
+      "id": "Post /V1/Charges"
+    },
+    {
+      "type": "Event",
+      "description": "Webhook event: charge.succeeded",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/charges/create-charge.md",
+      "properties": {},
+      "id": "Charge.Succeeded"
+    },
+    {
+      "type": "Event",
+      "description": "Webhook event: charge.failed",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/charges/create-charge.md",
+      "properties": {},
+      "id": "Charge.Failed"
+    },
+    {
+      "type": "APIObject",
+      "description": "",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/charges/create-charge.md",
+      "properties": {},
+      "id": "Paymentmethod"
+    },
+    {
+      "type": "Document",
+      "description": "Documentation file: list-charges.md",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/charges/list-charges.md",
+      "properties": {},
+      "id": "List Charges"
+    },
+    {
+      "type": "Endpoint",
+      "description": "API endpoint: GET /v1/charges",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/charges/list-charges.md",
+      "properties": {},
+      "id": "Get /V1/Charges"
+    },
+    {
+      "type": "Document",
+      "description": "Documentation file: retrieve-charge.md",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/charges/retrieve-charge.md",
+      "properties": {},
+      "id": "Retrieve A Charge"
+    },
+    {
+      "type": "Endpoint",
+      "description": "API endpoint: GET /v1/charges/:id",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/charges/retrieve-charge.md",
+      "properties": {},
+      "id": "Get /V1/Charges/:Id"
+    },
+    {
+      "type": "Document",
+      "description": "Documentation file: create-customer.md",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/customers/create-customer.md",
+      "properties": {},
+      "id": "Create A Customer"
+    },
+    {
+      "type": "Endpoint",
+      "description": "API endpoint: POST /v1/customers",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/customers/create-customer.md",
+      "properties": {},
+      "id": "Post /V1/Customers"
+    },
+    {
+      "type": "Event",
+      "description": "Webhook event: payment_method.attach",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/customers/create-customer.md",
+      "properties": {},
+      "id": "Payment_Method.Attach"
+    },
+    {
+      "type": "Event",
+      "description": "Webhook event: customer.created",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/customers/create-customer.md",
+      "properties": {},
+      "id": "Customer.Created"
+    },
+    {
+      "type": "Event",
+      "description": "Webhook event: customer.deleted",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/customers/create-customer.md",
+      "properties": {},
+      "id": "Customer.Deleted"
+    },
+    {
+      "type": "Document",
+      "description": "Documentation file: retrieve-customer.md",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/customers/retrieve-customer.md",
+      "properties": {},
+      "id": "Retrieve A Customer"
+    },
+    {
+      "type": "Endpoint",
+      "description": "API endpoint: GET /v1/customers/:id",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/customers/retrieve-customer.md",
+      "properties": {},
+      "id": "Get /V1/Customers/:Id"
+    },
+    {
+      "type": "Document",
+      "description": "Documentation file: update-customer.md",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/customers/update-customer.md",
+      "properties": {},
+      "id": "Update A Customer"
+    },
+    {
+      "type": "Endpoint",
+      "description": "API endpoint: POST /v1/customers/:id",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/customers/update-customer.md",
+      "properties": {},
+      "id": "Post /V1/Customers/:Id"
+    },
+    {
+      "type": "Event",
+      "description": "Webhook event: customer.updated",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/customers/update-customer.md",
+      "properties": {},
+      "id": "Customer.Updated"
+    },
+    {
+      "type": "Document",
+      "description": "Documentation file: errors.md",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/errors.md",
+      "properties": {},
+      "id": "Errors"
+    },
+    {
+      "type": "Event",
+      "description": "Webhook event: invoice.payment_failed",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/errors.md",
+      "properties": {},
+      "id": "Invoice.Payment_Failed"
+    },
+    {
+      "type": "Document",
+      "description": "Documentation file: getting-started.md",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/getting-started.md",
+      "properties": {},
+      "id": "Getting Started"
+    },
+    {
+      "type": "Document",
+      "description": "Documentation file: pay-invoice.md",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/invoices/pay-invoice.md",
+      "properties": {},
+      "id": "Pay An Invoice"
+    },
+    {
+      "type": "Endpoint",
+      "description": "API endpoint: POST /v1/invoices/:id/pay",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/invoices/pay-invoice.md",
+      "properties": {},
+      "id": "Post /V1/Invoices/:Id/Pay"
+    },
+    {
+      "type": "Event",
+      "description": "Webhook event: invoice.paid",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/invoices/pay-invoice.md",
+      "properties": {},
+      "id": "Invoice.Paid"
+    },
+    {
+      "type": "Document",
+      "description": "Documentation file: retrieve-invoice.md",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/invoices/retrieve-invoice.md",
+      "properties": {},
+      "id": "Retrieve An Invoice"
+    },
+    {
+      "type": "Endpoint",
+      "description": "API endpoint: GET /v1/invoices/:id",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/invoices/retrieve-invoice.md",
+      "properties": {},
+      "id": "Get /V1/Invoices/:Id"
+    },
+    {
+      "type": "Event",
+      "description": "Webhook event: invoice.voided",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/invoices/retrieve-invoice.md",
+      "properties": {},
+      "id": "Invoice.Voided"
+    },
+    {
+      "type": "Document",
+      "description": "Documentation file: attach-payment-method.md",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/payment-methods/attach-payment-method.md",
+      "properties": {},
+      "id": "Attach A Paymentmethod"
+    },
+    {
+      "type": "Endpoint",
+      "description": "API endpoint: POST /v1/payment_methods/:id/attach",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/payment-methods/attach-payment-method.md",
+      "properties": {},
+      "id": "Post /V1/Payment_Methods/:Id/Attach"
+    },
+    {
+      "type": "Event",
+      "description": "Webhook event: payment_method.attached",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/payment-methods/attach-payment-method.md",
+      "properties": {},
+      "id": "Payment_Method.Attached"
+    },
+    {
+      "type": "Document",
+      "description": "Documentation file: detach-payment-method.md",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/payment-methods/detach-payment-method.md",
+      "properties": {},
+      "id": "Detach A Paymentmethod"
+    },
+    {
+      "type": "Endpoint",
+      "description": "API endpoint: POST /v1/payment_methods/:id/detach",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/payment-methods/detach-payment-method.md",
+      "properties": {},
+      "id": "Post /V1/Payment_Methods/:Id/Detach"
+    },
+    {
+      "type": "Event",
+      "description": "Webhook event: payment_method.detached",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/payment-methods/detach-payment-method.md",
+      "properties": {},
+      "id": "Payment_Method.Detached"
+    },
+    {
+      "type": "Document",
+      "description": "Documentation file: cancel-subscription.md",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/subscriptions/cancel-subscription.md",
+      "properties": {},
+      "id": "Cancel A Subscription"
+    },
+    {
+      "type": "Endpoint",
+      "description": "API endpoint: DELETE /v1/subscriptions/:id",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/subscriptions/cancel-subscription.md",
+      "properties": {},
+      "id": "Delete /V1/Subscriptions/:Id"
+    },
+    {
+      "type": "Event",
+      "description": "Webhook event: customer.subscription.deleted",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/subscriptions/cancel-subscription.md",
+      "properties": {},
+      "id": "Customer.Subscription.Deleted"
+    },
+    {
+      "type": "Document",
+      "description": "Documentation file: create-subscription.md",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/subscriptions/create-subscription.md",
+      "properties": {},
+      "id": "Create A Subscription"
+    },
+    {
+      "type": "Endpoint",
+      "description": "API endpoint: POST /v1/subscriptions",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/subscriptions/create-subscription.md",
+      "properties": {},
+      "id": "Post /V1/Subscriptions"
+    },
+    {
+      "type": "Event",
+      "description": "Webhook event: subscription.created",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/subscriptions/create-subscription.md",
+      "properties": {},
+      "id": "Subscription.Created"
+    },
+    {
+      "type": "Event",
+      "description": "Webhook event: customer.subscription.trial_will_end",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/subscriptions/create-subscription.md",
+      "properties": {},
+      "id": "Customer.Subscription.Trial_Will_End"
+    },
+    {
+      "type": "Document",
+      "description": "Documentation file: webhook-events.md",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/webhooks/webhook-events.md",
+      "properties": {},
+      "id": "Webhook Events"
+    },
+    {
+      "type": "Event",
+      "description": "Webhook event: data.object",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/webhooks/webhook-events.md",
+      "properties": {},
+      "id": "Data.Object"
+    },
+    {
+      "type": "Event",
+      "description": "Webhook event: charge.refunded",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/webhooks/webhook-events.md",
+      "properties": {},
+      "id": "Charge.Refunded"
+    },
+    {
+      "type": "Event",
+      "description": "Webhook event: charge.dispute.created",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/webhooks/webhook-events.md",
+      "properties": {},
+      "id": "Charge.Dispute.Created"
+    },
+    {
+      "type": "Event",
+      "description": "Webhook event: invoice.created",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/webhooks/webhook-events.md",
+      "properties": {},
+      "id": "Invoice.Created"
+    },
+    {
+      "type": "Document",
+      "description": "Documentation file: webhook-signatures.md",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/webhooks/webhook-signatures.md",
+      "properties": {},
+      "id": "Webhook Signatures"
+    },
+    {
+      "type": "Event",
+      "description": "Webhook event: t.payload",
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/webhooks/webhook-signatures.md",
+      "properties": {},
+      "id": "T.Payload"
+    }
+  ],
+  "links": [
+    {
+      "edge_type": "contains",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/authentication.md",
+      "source": "Authentication",
+      "target": "Post /V1/Api_Keys/Rotate"
+    },
+    {
+      "edge_type": "contains",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/authentication.md",
+      "source": "Authentication",
+      "target": "Api_Key.Rotated"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/authentication.md",
+      "source": "Authentication",
+      "target": "Webhook"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/authentication.md",
+      "source": "Authentication",
+      "target": "Endpoint"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/authentication.md",
+      "source": "Authentication",
+      "target": "Customer"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/authentication.md",
+      "source": "Authentication",
+      "target": "Charge"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/authentication.md",
+      "source": "Authentication",
+      "target": "Subscription"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/authentication.md",
+      "source": "Authentication",
+      "target": "Invoice"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/authentication.md",
+      "source": "Authentication",
+      "target": "Idempotency"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/authentication.md",
+      "source": "Authentication",
+      "target": "Pagination"
+    },
+    {
+      "edge_type": "returns",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/authentication.md",
+      "source": "Post /V1/Api_Keys/Rotate",
+      "target": "Webhook"
+    },
+    {
+      "edge_type": "requires",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/getting-started.md",
+      "source": "Charge",
+      "target": "Customer"
+    },
+    {
+      "edge_type": "generates",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/getting-started.md",
+      "source": "Subscription",
+      "target": "Invoice"
+    },
+    {
+      "edge_type": "belongs_to",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/getting-started.md",
+      "source": "Subscription",
+      "target": "Customer"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/pagination.md",
+      "source": "Pagination",
+      "target": "Charge"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/pagination.md",
+      "source": "Pagination",
+      "target": "Customer"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/pagination.md",
+      "source": "Pagination",
+      "target": "Invoice"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/pagination.md",
+      "source": "Pagination",
+      "target": "Subscription"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/pagination.md",
+      "source": "Pagination",
+      "target": "Paymentmethod"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/pagination.md",
+      "source": "Pagination",
+      "target": "Webhook"
+    },
+    {
+      "edge_type": "contains",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/charges/create-charge.md",
+      "source": "Create A Charge",
+      "target": "Post /V1/Charges"
+    },
+    {
+      "edge_type": "contains",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/charges/create-charge.md",
+      "source": "Create A Charge",
+      "target": "Charge.Succeeded"
+    },
+    {
+      "edge_type": "contains",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/charges/create-charge.md",
+      "source": "Create A Charge",
+      "target": "Charge.Failed"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/charges/create-charge.md",
+      "source": "Create A Charge",
+      "target": "Charge"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/charges/create-charge.md",
+      "source": "Create A Charge",
+      "target": "Customer"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/charges/create-charge.md",
+      "source": "Create A Charge",
+      "target": "Paymentmethod"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/charges/create-charge.md",
+      "source": "Create A Charge",
+      "target": "Webhook"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/charges/create-charge.md",
+      "source": "Create A Charge",
+      "target": "Invoice"
+    },
+    {
+      "edge_type": "returns",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/charges/create-charge.md",
+      "source": "Post /V1/Charges",
+      "target": "Charge"
+    },
+    {
+      "edge_type": "belongs_to",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/getting-started.md",
+      "source": "Paymentmethod",
+      "target": "Customer"
+    },
+    {
+      "edge_type": "contains",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/charges/list-charges.md",
+      "source": "List Charges",
+      "target": "Get /V1/Charges"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/charges/list-charges.md",
+      "source": "List Charges",
+      "target": "Charge"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/charges/list-charges.md",
+      "source": "List Charges",
+      "target": "Customer"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/charges/list-charges.md",
+      "source": "List Charges",
+      "target": "Pagination"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/charges/list-charges.md",
+      "source": "List Charges",
+      "target": "Paymentmethod"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/charges/list-charges.md",
+      "source": "List Charges",
+      "target": "Invoice"
+    },
+    {
+      "edge_type": "returns",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/charges/list-charges.md",
+      "source": "Get /V1/Charges",
+      "target": "Charge"
+    },
+    {
+      "edge_type": "contains",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/charges/retrieve-charge.md",
+      "source": "Retrieve A Charge",
+      "target": "Get /V1/Charges/:Id"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/charges/retrieve-charge.md",
+      "source": "Retrieve A Charge",
+      "target": "Charge"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/charges/retrieve-charge.md",
+      "source": "Retrieve A Charge",
+      "target": "Customer"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/charges/retrieve-charge.md",
+      "source": "Retrieve A Charge",
+      "target": "Paymentmethod"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/charges/retrieve-charge.md",
+      "source": "Retrieve A Charge",
+      "target": "Subscription"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/charges/retrieve-charge.md",
+      "source": "Retrieve A Charge",
+      "target": "Invoice"
+    },
+    {
+      "edge_type": "returns",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/charges/retrieve-charge.md",
+      "source": "Get /V1/Charges/:Id",
+      "target": "Charge"
+    },
+    {
+      "edge_type": "contains",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/customers/create-customer.md",
+      "source": "Create A Customer",
+      "target": "Post /V1/Customers"
+    },
+    {
+      "edge_type": "contains",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/customers/create-customer.md",
+      "source": "Create A Customer",
+      "target": "Payment_Method.Attach"
+    },
+    {
+      "edge_type": "contains",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/customers/create-customer.md",
+      "source": "Create A Customer",
+      "target": "Customer.Created"
+    },
+    {
+      "edge_type": "contains",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/customers/create-customer.md",
+      "source": "Create A Customer",
+      "target": "Customer.Deleted"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/customers/create-customer.md",
+      "source": "Create A Customer",
+      "target": "Customer"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/customers/create-customer.md",
+      "source": "Create A Customer",
+      "target": "Paymentmethod"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/customers/create-customer.md",
+      "source": "Create A Customer",
+      "target": "Subscription"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/customers/create-customer.md",
+      "source": "Create A Customer",
+      "target": "Charge"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/customers/create-customer.md",
+      "source": "Create A Customer",
+      "target": "Invoice"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/customers/create-customer.md",
+      "source": "Create A Customer",
+      "target": "Webhook"
+    },
+    {
+      "edge_type": "returns",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/customers/create-customer.md",
+      "source": "Post /V1/Customers",
+      "target": "Customer"
+    },
+    {
+      "edge_type": "contains",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/customers/retrieve-customer.md",
+      "source": "Retrieve A Customer",
+      "target": "Get /V1/Customers/:Id"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/customers/retrieve-customer.md",
+      "source": "Retrieve A Customer",
+      "target": "Customer"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/customers/retrieve-customer.md",
+      "source": "Retrieve A Customer",
+      "target": "Paymentmethod"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/customers/retrieve-customer.md",
+      "source": "Retrieve A Customer",
+      "target": "Subscription"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/customers/retrieve-customer.md",
+      "source": "Retrieve A Customer",
+      "target": "Invoice"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/customers/retrieve-customer.md",
+      "source": "Retrieve A Customer",
+      "target": "Charge"
+    },
+    {
+      "edge_type": "returns",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/customers/retrieve-customer.md",
+      "source": "Get /V1/Customers/:Id",
+      "target": "Customer"
+    },
+    {
+      "edge_type": "contains",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/customers/update-customer.md",
+      "source": "Update A Customer",
+      "target": "Post /V1/Customers/:Id"
+    },
+    {
+      "edge_type": "contains",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/customers/update-customer.md",
+      "source": "Update A Customer",
+      "target": "Customer.Updated"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/customers/update-customer.md",
+      "source": "Update A Customer",
+      "target": "Customer"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/customers/update-customer.md",
+      "source": "Update A Customer",
+      "target": "Paymentmethod"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/customers/update-customer.md",
+      "source": "Update A Customer",
+      "target": "Webhook"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/customers/update-customer.md",
+      "source": "Update A Customer",
+      "target": "Charge"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/customers/update-customer.md",
+      "source": "Update A Customer",
+      "target": "Subscription"
+    },
+    {
+      "edge_type": "returns",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/customers/update-customer.md",
+      "source": "Post /V1/Customers/:Id",
+      "target": "Customer"
+    },
+    {
+      "edge_type": "contains",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/errors.md",
+      "source": "Errors",
+      "target": "Invoice.Payment_Failed"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/errors.md",
+      "source": "Errors",
+      "target": "Charge"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/errors.md",
+      "source": "Errors",
+      "target": "Paymentmethod"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/errors.md",
+      "source": "Errors",
+      "target": "Customer"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/errors.md",
+      "source": "Errors",
+      "target": "Subscription"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/errors.md",
+      "source": "Errors",
+      "target": "Invoice"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/errors.md",
+      "source": "Errors",
+      "target": "Webhook"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/getting-started.md",
+      "source": "Getting Started",
+      "target": "Authentication"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/getting-started.md",
+      "source": "Getting Started",
+      "target": "Charge"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/getting-started.md",
+      "source": "Getting Started",
+      "target": "Customer"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/getting-started.md",
+      "source": "Getting Started",
+      "target": "Paymentmethod"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/getting-started.md",
+      "source": "Getting Started",
+      "target": "Subscription"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/getting-started.md",
+      "source": "Getting Started",
+      "target": "Invoice"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/getting-started.md",
+      "source": "Getting Started",
+      "target": "Webhook"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/getting-started.md",
+      "source": "Getting Started",
+      "target": "Errors"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/getting-started.md",
+      "source": "Getting Started",
+      "target": "Pagination"
+    },
+    {
+      "edge_type": "contains",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/invoices/pay-invoice.md",
+      "source": "Pay An Invoice",
+      "target": "Post /V1/Invoices/:Id/Pay"
+    },
+    {
+      "edge_type": "contains",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/invoices/pay-invoice.md",
+      "source": "Pay An Invoice",
+      "target": "Invoice.Paid"
+    },
+    {
+      "edge_type": "contains",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/invoices/pay-invoice.md",
+      "source": "Pay An Invoice",
+      "target": "Charge.Succeeded"
+    },
+    {
+      "edge_type": "contains",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/invoices/pay-invoice.md",
+      "source": "Pay An Invoice",
+      "target": "Invoice.Payment_Failed"
+    },
+    {
+      "edge_type": "contains",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/invoices/pay-invoice.md",
+      "source": "Pay An Invoice",
+      "target": "Charge.Failed"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/invoices/pay-invoice.md",
+      "source": "Pay An Invoice",
+      "target": "Invoice"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/invoices/pay-invoice.md",
+      "source": "Pay An Invoice",
+      "target": "Charge"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/invoices/pay-invoice.md",
+      "source": "Pay An Invoice",
+      "target": "Customer"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/invoices/pay-invoice.md",
+      "source": "Pay An Invoice",
+      "target": "Paymentmethod"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/invoices/pay-invoice.md",
+      "source": "Pay An Invoice",
+      "target": "Webhook"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/invoices/pay-invoice.md",
+      "source": "Pay An Invoice",
+      "target": "Subscription"
+    },
+    {
+      "edge_type": "returns",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/invoices/pay-invoice.md",
+      "source": "Post /V1/Invoices/:Id/Pay",
+      "target": "Invoice"
+    },
+    {
+      "edge_type": "contains",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/invoices/retrieve-invoice.md",
+      "source": "Retrieve An Invoice",
+      "target": "Get /V1/Invoices/:Id"
+    },
+    {
+      "edge_type": "contains",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/invoices/retrieve-invoice.md",
+      "source": "Retrieve An Invoice",
+      "target": "Invoice.Paid"
+    },
+    {
+      "edge_type": "contains",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/invoices/retrieve-invoice.md",
+      "source": "Retrieve An Invoice",
+      "target": "Invoice.Payment_Failed"
+    },
+    {
+      "edge_type": "contains",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/invoices/retrieve-invoice.md",
+      "source": "Retrieve An Invoice",
+      "target": "Invoice.Voided"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/invoices/retrieve-invoice.md",
+      "source": "Retrieve An Invoice",
+      "target": "Invoice"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/invoices/retrieve-invoice.md",
+      "source": "Retrieve An Invoice",
+      "target": "Customer"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/invoices/retrieve-invoice.md",
+      "source": "Retrieve An Invoice",
+      "target": "Subscription"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/invoices/retrieve-invoice.md",
+      "source": "Retrieve An Invoice",
+      "target": "Charge"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/invoices/retrieve-invoice.md",
+      "source": "Retrieve An Invoice",
+      "target": "Webhook"
+    },
+    {
+      "edge_type": "returns",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/invoices/retrieve-invoice.md",
+      "source": "Get /V1/Invoices/:Id",
+      "target": "Invoice"
+    },
+    {
+      "edge_type": "contains",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/payment-methods/attach-payment-method.md",
+      "source": "Attach A Paymentmethod",
+      "target": "Post /V1/Payment_Methods/:Id/Attach"
+    },
+    {
+      "edge_type": "contains",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/payment-methods/attach-payment-method.md",
+      "source": "Attach A Paymentmethod",
+      "target": "Payment_Method.Attached"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/payment-methods/attach-payment-method.md",
+      "source": "Attach A Paymentmethod",
+      "target": "Paymentmethod"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/payment-methods/attach-payment-method.md",
+      "source": "Attach A Paymentmethod",
+      "target": "Customer"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/payment-methods/attach-payment-method.md",
+      "source": "Attach A Paymentmethod",
+      "target": "Charge"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/payment-methods/attach-payment-method.md",
+      "source": "Attach A Paymentmethod",
+      "target": "Subscription"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/payment-methods/attach-payment-method.md",
+      "source": "Attach A Paymentmethod",
+      "target": "Webhook"
+    },
+    {
+      "edge_type": "returns",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/payment-methods/attach-payment-method.md",
+      "source": "Post /V1/Payment_Methods/:Id/Attach",
+      "target": "Paymentmethod"
+    },
+    {
+      "edge_type": "contains",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/payment-methods/detach-payment-method.md",
+      "source": "Detach A Paymentmethod",
+      "target": "Post /V1/Payment_Methods/:Id/Detach"
+    },
+    {
+      "edge_type": "contains",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/payment-methods/detach-payment-method.md",
+      "source": "Detach A Paymentmethod",
+      "target": "Payment_Method.Detached"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/payment-methods/detach-payment-method.md",
+      "source": "Detach A Paymentmethod",
+      "target": "Paymentmethod"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/payment-methods/detach-payment-method.md",
+      "source": "Detach A Paymentmethod",
+      "target": "Customer"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/payment-methods/detach-payment-method.md",
+      "source": "Detach A Paymentmethod",
+      "target": "Subscription"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/payment-methods/detach-payment-method.md",
+      "source": "Detach A Paymentmethod",
+      "target": "Webhook"
+    },
+    {
+      "edge_type": "returns",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/payment-methods/detach-payment-method.md",
+      "source": "Post /V1/Payment_Methods/:Id/Detach",
+      "target": "Paymentmethod"
+    },
+    {
+      "edge_type": "contains",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/subscriptions/cancel-subscription.md",
+      "source": "Cancel A Subscription",
+      "target": "Delete /V1/Subscriptions/:Id"
+    },
+    {
+      "edge_type": "contains",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/subscriptions/cancel-subscription.md",
+      "source": "Cancel A Subscription",
+      "target": "Customer.Subscription.Deleted"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/subscriptions/cancel-subscription.md",
+      "source": "Cancel A Subscription",
+      "target": "Subscription"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/subscriptions/cancel-subscription.md",
+      "source": "Cancel A Subscription",
+      "target": "Webhook"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/subscriptions/cancel-subscription.md",
+      "source": "Cancel A Subscription",
+      "target": "Invoice"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/subscriptions/cancel-subscription.md",
+      "source": "Cancel A Subscription",
+      "target": "Customer"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/subscriptions/cancel-subscription.md",
+      "source": "Cancel A Subscription",
+      "target": "Charge"
+    },
+    {
+      "edge_type": "returns",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/subscriptions/cancel-subscription.md",
+      "source": "Delete /V1/Subscriptions/:Id",
+      "target": "Subscription"
+    },
+    {
+      "edge_type": "contains",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/subscriptions/create-subscription.md",
+      "source": "Create A Subscription",
+      "target": "Post /V1/Subscriptions"
+    },
+    {
+      "edge_type": "contains",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/subscriptions/create-subscription.md",
+      "source": "Create A Subscription",
+      "target": "Subscription.Created"
+    },
+    {
+      "edge_type": "contains",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/subscriptions/create-subscription.md",
+      "source": "Create A Subscription",
+      "target": "Customer.Subscription.Trial_Will_End"
+    },
+    {
+      "edge_type": "contains",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/subscriptions/create-subscription.md",
+      "source": "Create A Subscription",
+      "target": "Invoice.Payment_Failed"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/subscriptions/create-subscription.md",
+      "source": "Create A Subscription",
+      "target": "Subscription"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/subscriptions/create-subscription.md",
+      "source": "Create A Subscription",
+      "target": "Customer"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/subscriptions/create-subscription.md",
+      "source": "Create A Subscription",
+      "target": "Paymentmethod"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/subscriptions/create-subscription.md",
+      "source": "Create A Subscription",
+      "target": "Invoice"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/subscriptions/create-subscription.md",
+      "source": "Create A Subscription",
+      "target": "Charge"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/subscriptions/create-subscription.md",
+      "source": "Create A Subscription",
+      "target": "Webhook"
+    },
+    {
+      "edge_type": "returns",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/subscriptions/create-subscription.md",
+      "source": "Post /V1/Subscriptions",
+      "target": "Subscription"
+    },
+    {
+      "edge_type": "contains",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/webhooks/webhook-events.md",
+      "source": "Webhook Events",
+      "target": "Data.Object"
+    },
+    {
+      "edge_type": "contains",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/webhooks/webhook-events.md",
+      "source": "Webhook Events",
+      "target": "Charge.Succeeded"
+    },
+    {
+      "edge_type": "contains",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/webhooks/webhook-events.md",
+      "source": "Webhook Events",
+      "target": "Charge.Failed"
+    },
+    {
+      "edge_type": "contains",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/webhooks/webhook-events.md",
+      "source": "Webhook Events",
+      "target": "Charge.Refunded"
+    },
+    {
+      "edge_type": "contains",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/webhooks/webhook-events.md",
+      "source": "Webhook Events",
+      "target": "Charge.Dispute.Created"
+    },
+    {
+      "edge_type": "contains",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/webhooks/webhook-events.md",
+      "source": "Webhook Events",
+      "target": "Customer.Created"
+    },
+    {
+      "edge_type": "contains",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/webhooks/webhook-events.md",
+      "source": "Webhook Events",
+      "target": "Customer.Updated"
+    },
+    {
+      "edge_type": "contains",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/webhooks/webhook-events.md",
+      "source": "Webhook Events",
+      "target": "Customer.Deleted"
+    },
+    {
+      "edge_type": "contains",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/webhooks/webhook-events.md",
+      "source": "Webhook Events",
+      "target": "Customer.Subscription.Trial_Will_End"
+    },
+    {
+      "edge_type": "contains",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/webhooks/webhook-events.md",
+      "source": "Webhook Events",
+      "target": "Customer.Subscription.Deleted"
+    },
+    {
+      "edge_type": "contains",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/webhooks/webhook-events.md",
+      "source": "Webhook Events",
+      "target": "Invoice.Created"
+    },
+    {
+      "edge_type": "contains",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/webhooks/webhook-events.md",
+      "source": "Webhook Events",
+      "target": "Invoice.Paid"
+    },
+    {
+      "edge_type": "contains",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/webhooks/webhook-events.md",
+      "source": "Webhook Events",
+      "target": "Invoice.Payment_Failed"
+    },
+    {
+      "edge_type": "contains",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/webhooks/webhook-events.md",
+      "source": "Webhook Events",
+      "target": "Invoice.Voided"
+    },
+    {
+      "edge_type": "contains",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/webhooks/webhook-events.md",
+      "source": "Webhook Events",
+      "target": "Payment_Method.Attached"
+    },
+    {
+      "edge_type": "contains",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/webhooks/webhook-events.md",
+      "source": "Webhook Events",
+      "target": "Payment_Method.Detached"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/webhooks/webhook-events.md",
+      "source": "Webhook Events",
+      "target": "Charge"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/webhooks/webhook-events.md",
+      "source": "Webhook Events",
+      "target": "Customer"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/webhooks/webhook-events.md",
+      "source": "Webhook Events",
+      "target": "Subscription"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/webhooks/webhook-events.md",
+      "source": "Webhook Events",
+      "target": "Invoice"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/webhooks/webhook-events.md",
+      "source": "Webhook Events",
+      "target": "Paymentmethod"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/webhooks/webhook-events.md",
+      "source": "Webhook Events",
+      "target": "Webhook"
+    },
+    {
+      "edge_type": "contains",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/webhooks/webhook-signatures.md",
+      "source": "Webhook Signatures",
+      "target": "T.Payload"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/webhooks/webhook-signatures.md",
+      "source": "Webhook Signatures",
+      "target": "Webhook"
+    },
+    {
+      "edge_type": "references",
+      "weight": 1.0,
+      "source_file": "/Users/saipittala/Documents/Try_it_out/nia-docs/docs/webhooks/webhook-signatures.md",
+      "source": "Webhook Signatures",
+      "target": "Authentication"
+    }
+  ]
+}
