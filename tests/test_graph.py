@@ -1,7 +1,7 @@
 """Tests for ConceptGraph core operations."""
 import pytest
-from nia.graph import ConceptGraph
-from nia.schema import NodeModel, EdgeModel, NodeType, EdgeType
+from kgraph.graph import ConceptGraph
+from kgraph.schema import NodeModel, EdgeModel, NodeType, EdgeType
 
 
 @pytest.fixture

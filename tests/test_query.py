@@ -1,8 +1,8 @@
 """Tests for GraphQuery interface."""
 import pytest
-from nia.graph import ConceptGraph
-from nia.query import GraphQuery
-from nia.schema import NodeModel, EdgeModel, NodeType, EdgeType
+from kgraph.graph import ConceptGraph
+from kgraph.query import GraphQuery
+from kgraph.schema import NodeModel, EdgeModel, NodeType, EdgeType
 
 
 @pytest.fixture

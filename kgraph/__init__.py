@@ -1,5 +1,5 @@
 """
-nia — Conceptual Graph Engine for Document Navigation
+kgraph — Conceptual Graph Engine for Document Navigation
 """
 from .graph import ConceptGraph
 from .builder import GraphBuilder

@@ -3,8 +3,8 @@ import tempfile
 from pathlib import Path
 
 import pytest
-from nia.extractor_heuristic import extract
-from nia.schema import NodeType, EdgeType
+from kgraph.extractor_heuristic import extract
+from kgraph.schema import NodeType, EdgeType
 
 
 SAMPLE_DOC = """# Create a Charge

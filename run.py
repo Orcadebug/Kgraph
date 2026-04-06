@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Nia Docs — Conceptual Graph Engine
+Knowledge Graph — Conceptual Graph Engine
 Inspired by: arXiv:2512.05470 (Everything is Context)
 
 Usage:
@@ -24,7 +24,7 @@ GRAPH_PATH = Path(__file__).parent / "data" / "graph.json"
 
 
 def cmd_build(args):
-    from nia.builder import GraphBuilder
+    from kgraph.builder import GraphBuilder
     use_llm = not args.no_llm
     builder = GraphBuilder(DOCS_DIR, use_llm=use_llm)
     graph = builder.build(verbose=True)
@@ -48,7 +48,7 @@ def cmd_stats(args):
 
 
 def cmd_query(args):
-    from nia.query import GraphQuery
+    from kgraph.query import GraphQuery
     graph = _load_graph()
     gq = GraphQuery(graph)
     result = gq.related_concepts(args.concept)
@@ -56,7 +56,7 @@ def cmd_query(args):
 
 
 def cmd_connect(args):
-    from nia.query import GraphQuery
+    from kgraph.query import GraphQuery
     graph = _load_graph()
     gq = GraphQuery(graph)
     result = gq.find_connection(args.source, args.target)
@@ -64,7 +64,7 @@ def cmd_connect(args):
 
 
 def cmd_nodes(args):
-    from nia.query import GraphQuery
+    from kgraph.query import GraphQuery
     graph = _load_graph()
     gq = GraphQuery(graph)
     result = gq.concepts_by_type(args.type)
@@ -72,7 +72,7 @@ def cmd_nodes(args):
 
 
 def cmd_search(args):
-    from nia.filesystem import FileSystem
+    from kgraph.filesystem import FileSystem
     fs = FileSystem(DOCS_DIR)
     results = fs.search(args.query)
     if not results:
@@ -85,16 +85,16 @@ def cmd_search(args):
 
 
 def cmd_chat(args):
-    from nia.query import GraphQuery
-    from nia.filesystem import FileSystem
-    from nia.agent import AgentToolkit
+    from kgraph.query import GraphQuery
+    from kgraph.filesystem import FileSystem
+    from kgraph.agent import AgentToolkit
 
     graph = _load_graph()
     gq = GraphQuery(graph)
     fs = FileSystem(DOCS_DIR)
     agent = AgentToolkit(gq, fs)
 
-    print("Nia Docs Agent (graph + filesystem hybrid)")
+    print("Knowledge Graph Agent (graph + filesystem hybrid)")
     print("Type your question or 'quit' to exit.\n")
 
     while True:
@@ -129,7 +129,7 @@ def cmd_export(args):
 
 
 def _load_graph():
-    from nia.graph import ConceptGraph
+    from kgraph.graph import ConceptGraph
     if not GRAPH_PATH.exists():
         print(f"Graph not found at {GRAPH_PATH}. Run 'python run.py build' first.")
         sys.exit(1)
