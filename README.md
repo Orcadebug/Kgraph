@@ -21,38 +21,50 @@ This engine layers a **semantic knowledge graph** on top of the flat filesystem,
 
 ## Architecture Overview
 
+### Layered Architecture
+
 ```
-┌─────────────────────┐
-│  Markdown Docs      │  (flat filesystem)
-│  (15 files)         │
-└──────────┬──────────┘
-           │
-           ↓ [Extraction]
-┌──────────────────────────────────────┐
-│  ConceptGraph (NetworkX DiGraph)     │
-│  ├─ 59 nodes (Objects, Endpoints)    │
-│  ├─ 167 edges (typed relationships)  │
-│  └─ Bidirectional traversal          │
-└──────────┬──────────────────────────┘
-           │
-           ↓ [Query Interface]
-┌──────────────────────────────────────┐
-│  GraphQuery                          │
-│  ├─ related_concepts(entity)         │
-│  ├─ find_connection(a, b)            │
-│  ├─ concepts_by_type(type)           │
-│  └─ search_graph(query)              │
-└──────────┬──────────────────────────┘
-           │
-           ↓ [Agent Tools]
-┌──────────────────────────────────────┐
-│  AgentToolkit (LLM tool-calling)     │
-│  ├─ navigate(concept)                │
-│  ├─ inspect(concept)                 │
-│  ├─ connect(a, b)                    │
-│  ├─ search_files(query)              │
-│  └─ read(file_path)                  │
-└──────────────────────────────────────┘
+┌────────────────────────────────────────────────────────────┐
+│  HETEROGENEOUS CONTEXT SOURCES                             │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐    │
+│  │ Docs (flat)  │  │ Knowledge    │  │ External     │    │
+│  │ filesystem   │  │ Graph (graph)│  │ APIs         │    │
+│  └──────────────┘  └──────────────┘  └──────────────┘    │
+└────────┬──────────────────────────────────────┬────────────┘
+         │                                      │
+         ↓ [Resolver Adapters - Pluggable]     │
+┌────────────────────────────────────────────────────────────┐
+│  SYSTEMFS — VIRTUAL FILE SYSTEM (Unified Hierarchy)       │
+│  ┌──────────────────────────────────────────────────┐    │
+│  │ /docs/                   [DocsResolver]          │    │
+│  │ /graph/nodes/            [GraphResolver]         │    │
+│  │ /graph/edges/            [GraphResolver]         │    │
+│  │ /context/memory/         [MemoryResolver]        │    │
+│  │ /context/history/        [History Layer]         │    │
+│  │ /context/scratchpad/     [Ephemeral]             │    │
+│  │ /modules/                [ModuleResolver]        │    │
+│  └──────────────────────────────────────────────────┘    │
+└────────┬──────────────────────────────────────────────────┘
+         │
+         ↓ [Persistent Context Layers]
+    ┌─────────────────────────────────────┐
+    │ History:    append-only JSONL log   │
+    │ Memory:     fact/episodic/proc JSON │
+    │ Scratchpad: ephemeral workspace     │
+    └─────────────────────────────────────┘
+         │
+         ↓ [Context Engineering Pipeline]
+    ┌──────────────────────────────────────┐
+    │ Constructor: query, rank, select     │
+    │ Updater:     inject into LLM window  │
+    │ Evaluator:   validate → write memory │
+    └──────────────────────────────────────┘
+         │
+         ↓ [Agent Tools]
+    ┌──────────────────────────────────────┐
+    │ Traditional:  navigate, inspect, ... │
+    │ VFS-native:   vfs_read, vfs_list, .. │
+    └──────────────────────────────────────┘
 ```
 
 ---
@@ -289,6 +301,182 @@ Return: {answer, traversal_log, sources}
 
 ---
 
+## Virtual File System (SystemFS)
+
+### Overview
+
+SystemFS projects all heterogeneous context sources—documentation, knowledge graph, memory, external APIs—into a **unified hierarchical directory structure**. This enables agents to navigate, query, and persist knowledge using standard file operations (`read`, `write`, `list`, `search`, `exec`) across disparate backends.
+
+**Key design principle:** Adapters (resolvers) translate complex external data structures into standard VFS nodes without modifying underlying sources.
+
+### Resolver Pattern
+
+Each resolver implements a pluggable adapter that maps a data source into the VFS hierarchy:
+
+```python
+class BaseResolver(ABC):
+    name: str              # resolver identifier
+    readonly: bool         # read-only or writable
+    
+    read(path: str) → VFSResult        # fetch node content
+    write(path, content, metadata)     # persist (if writable)
+    list(path: str) → VFSResult        # list children
+    search(query, path, max_results)   # keyword search
+    exec(path, args) → VFSResult       # special operations
+```
+
+**Mounted Resolvers:**
+
+| Mount | Resolver | Backend | Writable | Purpose |
+|-------|----------|---------|----------|---------|
+| `/docs/` | DocsResolver | kgraph.filesystem.FileSystem | No | Markdown documentation |
+| `/graph/` | GraphResolver | ConceptGraph + GraphQuery | No | Knowledge graph nodes/edges/stats |
+| `/context/memory/` | MemoryResolver | JSON files (fact/episodic/procedural) | Yes | Persistent memory entries |
+| `/modules/` | ModuleResolver | Pluggable handlers | No | External API mounts |
+
+**Resolver dispatch:** Longest-prefix match determines which resolver handles a path. E.g., `/docs/charges/create.md` → DocsResolver, `/graph/nodes/Charge` → GraphResolver.
+
+---
+
+## Persistent Context Layers
+
+Addressing the statelessness problem of LLMs via three-layer storage built into the filesystem:
+
+### History Layer: `/context/history/`
+
+**Append-only JSON-lines log of all interactions and reasoning steps.**
+
+- **Format:** One file per session: `data/history/{date}_{session_id}.jsonl`
+- **Entry model:** `HistoryEntry(timestamp, event_type, actor, path, data, session_id)`
+- **Events logged:** `read`, `write`, `search`, `context_injection`, `tool_call`, state transitions
+- **Query API:** `query_history(session_id=None, event_type=None, limit=100)` — filtered retrieval
+
+**Use case:** Audit trail, session replay, reasoning reconstruction.
+
+### Memory Layer: `/context/memory/`
+
+**Indexed structured knowledge in three categories.**
+
+**Structure:**
+```
+data/memory/
+├── fact/                    # Verified facts (high confidence)
+├── episodic/               # Interaction memories (events, outcomes)
+└── procedural/             # Procedural knowledge (how-to patterns)
+```
+
+**Entry model:** `MemoryEntry(key, content, memory_type, confidence, source_paths, access_count, tags)`
+
+**Write API:** `resolver.write("/context/memory/fact/key", content, metadata={confidence, source_paths, tags})`
+
+**Query API:** `resolver.list("/context/memory/fact/")`, `search(query, "/context/memory/")`
+
+**Use case:** Long-term learning, fact persistence, procedural replay.
+
+### Scratchpad Layer: `/context/scratchpad/`
+
+**Ephemeral workspace for intermediate computations during active reasoning.**
+
+- Writable directory
+- Automatically cleared between sessions
+- Used by agents for drafting, exploration, temporary results
+
+---
+
+## Context Engineering Pipeline
+
+Solves the token-window constraint via dynamic context selection and injection:
+
+### ContextConstructor
+
+Queries the VFS, scores artifacts by composite metrics, selects within a token budget.
+
+```python
+constructor = ContextConstructor(vfs, max_tokens=8000)
+
+# Build context manifest for a query
+manifest = constructor.build_context("How do subscriptions work?")
+# → ContextManifest(selected_paths=[...], freshness_scores={...}, 
+#                   similarity_scores={...}, trust_scores={...})
+
+# Materialize as a string for LLM injection
+context_str = constructor.materialize(manifest)
+# → markdown text with headers, ~8000 tokens
+```
+
+**Scoring metrics:**
+- **Freshness:** nodes updated recently score higher (decay over 24h)
+- **Similarity:** keyword overlap with query (TF-IDF approximation)
+- **Trust:** provenance confidence; docs default 0.8, memory 0.6
+
+**Token estimation:** ~4 characters per token (simple heuristic).
+
+### ContextUpdater
+
+Injects materialized context into LLM message window and logs injections.
+
+```python
+updater = ContextUpdater(history_layer)
+
+# Inject context as a system message
+messages = updater.inject_context(messages, manifest, context_str)
+
+# Or rebuild context for a new query
+messages, manifest = updater.refresh_context(messages, query, constructor)
+```
+
+**Behavior:**
+- Inserts or replaces a system-role context message
+- Logs injection as a history event with source metadata
+- Maintains coherence across multiple context refreshes
+
+### ContextEvaluator
+
+Closes the loop by validating model outputs against VFS sources.
+
+```python
+evaluator = ContextEvaluator(vfs)
+
+# Extract claims from output, score confidence against sources
+memory_entries = evaluator.evaluate(llm_output, manifest)
+# → MemoryEntry objects written to /context/memory/
+```
+
+**Workflow:**
+1. Extract factual claims from LLM output (sentence-level)
+2. Score confidence via keyword overlap against source material
+3. **High confidence (>0.7):** write as `fact` entry (verified)
+4. **Low confidence (<0.7):** write as `episodic` entry with `needs_review` tag
+5. Return created `MemoryEntry` objects for auditing
+
+---
+
+## Agent Toolkit: Enhanced Tools
+
+### Traditional Tools (unchanged)
+
+| Tool | Purpose |
+|------|---------|
+| `navigate(concept)` | Get related concepts from graph |
+| `inspect(concept)` | Full node details and relationships |
+| `connect(source, target)` | Find shortest path |
+| `search_graph(query)` | Semantic graph search |
+| `search_files(query)` | Flat keyword search |
+| `read(file_path)` | Read doc content |
+
+### New VFS-Native Tools
+
+| Tool | Purpose | Example |
+|------|---------|---------|
+| `vfs_read(path)` | Read any VFS node | `vfs_read("/graph/nodes/Charge")` → JSON details |
+| `vfs_list(path)` | List VFS directory | `vfs_list("/context/memory/fact/")` → fact entries |
+| `vfs_search(query, path)` | Search within scope | `vfs_search("payment", "/docs/")` → matching docs |
+| `vfs_write(path, content)` | Write to memory/scratchpad | `vfs_write("/context/memory/fact/charge-rule", "...")` |
+
+**System prompt now describes the VFS hierarchy**, enabling agents to navigate proactively.
+
+---
+
 ## Implementation Details
 
 ### Extraction Pipeline
@@ -367,7 +555,9 @@ Used by:
 
 ### run.py
 
-Single entry point for all operations:
+Single entry point for all graph, VFS, and context operations:
+
+#### Graph Operations
 
 ```bash
 # Build graph from docs
@@ -380,41 +570,110 @@ python run.py nodes <type>                 # list by type
 python run.py search <query>               # keyword search
 python run.py stats                        # graph statistics
 
-# Interactive agent
-python run.py chat                         # LLM agent REPL (requires OPENROUTER_API_KEY)
-
 # Export
 python run.py export                       # graph JSON to stdout
+```
+
+#### Virtual File System Operations
+
+```bash
+# Explore the unified hierarchy
+python run.py vfs mounts                   # list mounted resolvers
+python run.py vfs list /                   # browse hierarchy
+python run.py vfs list /docs/              # list docs
+python run.py vfs list /graph/nodes/       # list graph nodes
+python run.py vfs list /context/memory/    # list memory entries
+
+# Read content
+python run.py vfs read /docs/authentication.md
+python run.py vfs read /graph/nodes/Charge
+python run.py vfs read /context/memory/fact/my-key
+
+# Search
+python run.py vfs search "payment"         # global search
+python run.py vfs search "auth" /docs/     # scoped to docs
+```
+
+#### Context Layer Operations
+
+```bash
+# History
+python run.py context history              # recent interactions
+python run.py context history --limit 50   # custom limit
+
+# Memory
+python run.py context memory               # all entries
+python run.py context memory fact          # verified facts only
+python run.py context memory episodic      # memories only
+python run.py context memory procedural    # procedures only
+```
+
+#### Interactive Agent
+
+```bash
+# LLM agent with full VFS/context access
+python run.py chat                         # requires OPENROUTER_API_KEY
 ```
 
 ---
 
 ## Testing Strategy
 
-**28 unit tests** covering:
+**86 unit tests** covering:
 
-**Graph engine** (`tests/test_graph.py`):
+### Graph Engine (28 original tests, `tests/test_graph.py`, `test_extractor.py`, `test_query.py`)
 - Node add/get/normalization
 - Neighbor queries (in/out/both directions)
 - Path finding and subgraph extraction
 - Edge strengthening
 - Serialization roundtrip
+- Heuristic/LLM extraction
+- Query interface (related concepts, type listing, fuzzy search)
 
-**Extraction** (`tests/test_extractor.py`):
-- Heuristic endpoint/event/entity parsing
-- Relationship line extraction
-- Source file recording
+### SystemFS & Resolvers (34 new tests)
 
-**Query interface** (`tests/test_query.py`):
-- Related concepts discovery
-- Path finding
-- Type-based listing
-- Fuzzy search
-- Graph statistics
+**Core VFS** (`tests/test_vfs.py`):
+- Mount/unmount, routing, root listing
+- Longest-prefix resolver dispatch
+- Read-only enforcement
+- Writable resolver support
+- Cross-resolver search merging
 
-**Run tests:**
+**Sandbox** (`tests/test_sandbox.py`):
+- Path normalization, traversal prevention
+- Boundary validation, relative path computation
+
+**DocsResolver** (`tests/test_resolver_docs.py`):
+- Read/list/search on markdown files
+- Missing file errors, write rejection
+
+**GraphResolver** (`tests/test_resolver_graph.py`):
+- Node/edge/stats reads
+- Virtual path layout
+- exec() operations (find_path, subgraph, related_concepts)
+
+**MemoryResolver** (`tests/test_resolver_memory.py`):
+- Write/read roundtrip for all memory types
+- Persistence across instances
+- Access count tracking, search, type filtering
+
+### Context Engineering (12 new tests)
+
+**History Layer** (`tests/test_context_history.py`):
+- Session startup, JSON-lines format
+- Log entry, query by event type/session ID
+- Session isolation
+
+**Context Constructor** (`tests/test_context_constructor.py`):
+- Query ranking by freshness/similarity/trust
+- Token budget enforcement
+- Hint inclusion, materialization
+
+### Run tests:
 ```bash
-pytest tests/ -v
+pytest tests/ -v                # all 86 tests
+pytest tests/test_vfs.py -v     # VFS only
+pytest tests/test_*.py -v       # specific suite
 ```
 
 ---
@@ -473,10 +732,41 @@ pytest>=7.0.0           # Testing
 
 ---
 
+## SystemFS: Design Philosophy
+
+The Virtual File System answers the core challenge from arXiv:2512.05470: **how to project all heterogeneous context into a unified, programmable abstraction that doesn't require agents to learn multiple APIs.**
+
+**Key innovations:**
+
+1. **Unified hierarchy:** All context (docs, graph, memory, APIs) at `/` with standard file semantics
+2. **Pluggable adapters:** Resolvers add new data sources without touching existing code
+3. **Persistent layers:** History for auditability, memory for learning, scratchpad for workspace
+4. **Context engineering:** Automatic selection & injection with quality metrics (freshness, similarity, trust)
+5. **Closed feedback loop:** Evaluation validates outputs and routes high-confidence findings back to memory
+
+This is the first implementation of a **context-centric agent architecture** where knowledge flows bidirectionally: agents read context, reason, write findings back to persistent memory.
+
+---
+
 ## Future Directions
 
+### Short Term
+
+- **ModuleResolver handlers:** Integrate external APIs (GitHub, Jira, web search) as mounted directories
+- **Confidence propagation:** Surface extraction confidence through the VFS
+- **Context refresh heuristics:** Automatic re-querying when scratchpad changes
+- **Memory decay:** Temporal weighting in constructor (recent facts score higher)
+
+### Medium Term
+
+- **Vector embeddings:** Semantic similarity for fuzzy entity linking and memory retrieval
+- **Multi-hop reasoning:** Agent plans multi-step journeys through graph and memory
+- **Human-in-the-loop:** Review loop for `needs_review` tagged outputs before memory commit
 - **Temporal versioning:** Track how concepts evolve across doc versions
-- **Confidence scoring:** Weight nodes/edges by extraction confidence
-- **Multi-hop reasoning:** Agent plans multi-step journeys through graph
-- **Vector embeddings:** Semantic similarity for fuzzy entity linking
-- **Interactive refinement:** User feedback improves extraction weights
+
+### Long Term
+
+- **Distributed memory:** Shared memory pool across multiple agents
+- **Collaborative refinement:** Agents update each other's memory; consensus scoring
+- **Knowledge compilation:** Compress repeated reasoning patterns into new nodes/edges
+- **Adaptive extraction:** Extraction weights learned from evaluator feedback

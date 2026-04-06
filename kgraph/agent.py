@@ -21,6 +21,11 @@ from dotenv import load_dotenv
 from .filesystem import FileSystem
 from .query import GraphQuery
 
+try:
+    from systemfs.vfs import SystemFS
+except ImportError:
+    SystemFS = None
+
 load_dotenv()
 
 # ── Tool definitions (OpenAI function-calling format) ─────────────────────────
@@ -111,6 +116,64 @@ _TOOLS = [
             },
         },
     },
+    {
+        "type": "function",
+        "function": {
+            "name": "vfs_read",
+            "description": "Read any file in the Virtual File System by absolute path. Paths include /docs/, /graph/nodes/, /graph/edges/, /graph/stats, /context/memory/fact/, /context/memory/episodic/, /context/scratchpad/",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "path": {"type": "string", "description": "Absolute VFS path (e.g. '/docs/auth.md', '/graph/nodes/Charge', '/context/memory/fact/key')"},
+                },
+                "required": ["path"],
+            },
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "vfs_list",
+            "description": "List contents of a VFS directory.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "path": {"type": "string", "description": "VFS directory path (e.g. '/', '/docs/', '/graph/nodes/', '/context/memory/')"},
+                },
+                "required": ["path"],
+            },
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "vfs_search",
+            "description": "Search for content across the VFS. Optionally scope to a path.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "query": {"type": "string", "description": "Search terms"},
+                    "path": {"type": "string", "description": "Optional VFS path to scope the search (default: '/')"},
+                },
+                "required": ["query"],
+            },
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "vfs_write",
+            "description": "Write content to the VFS. Only writable paths work (e.g. /context/memory/fact/, /context/scratchpad/).",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "path": {"type": "string", "description": "Absolute VFS path to write to"},
+                    "content": {"type": "string", "description": "Content to write"},
+                },
+                "required": ["path", "content"],
+            },
+        },
+    },
 ]
 
 _SYSTEM_PROMPT = """You are a documentation navigator with access to two complementary systems:
@@ -127,6 +190,19 @@ When answering questions:
 - Always cite which documents you consulted
 
 You have access to these tools: navigate, inspect, connect, search_graph, search_files, read
+
+The VFS (Virtual File System) exposes all context sources in a unified hierarchy:
+- /docs/          — API documentation files
+- /graph/nodes/   — Knowledge graph nodes (use vfs_read /graph/nodes/Charge for details)
+- /graph/edges/   — Knowledge graph edges
+- /graph/stats    — Graph statistics
+- /context/memory/fact/       — Verified facts
+- /context/memory/episodic/   — Interaction memories
+- /context/memory/procedural/ — Procedural knowledge
+- /context/scratchpad/        — Ephemeral workspace
+
+Use vfs_list to explore, vfs_read to fetch content, vfs_search to find relevant nodes,
+and vfs_write to save findings to /context/memory/ or /context/scratchpad/.
 """
 
 
@@ -136,10 +212,21 @@ class AgentToolkit:
     Runs a tool-calling loop via OpenRouter and returns a structured response.
     """
 
-    def __init__(self, graph_query: GraphQuery, filesystem: FileSystem, model: str | None = None):
+    def __init__(self, graph_query: GraphQuery = None, filesystem: FileSystem = None,
+                 model: str | None = None, system_fs=None):
         self.gq = graph_query
         self.fs = filesystem
         self.model = model or os.getenv("OPENROUTER_MODEL", "anthropic/claude-sonnet-4-5")
+
+        if system_fs is not None:
+            self._vfs = system_fs
+        elif SystemFS is not None and (graph_query is not None or filesystem is not None):
+            try:
+                self._vfs = SystemFS()
+            except Exception:
+                self._vfs = None
+        else:
+            self._vfs = None
 
     def chat(self, user_message: str, max_iterations: int = 10) -> dict[str, Any]:
         """
@@ -241,6 +328,42 @@ class AgentToolkit:
             if content is None:
                 return {"error": f"File not found: {args['file_path']}"}, []
             return {"path": args["file_path"], "content": content}, [args["file_path"]]
+
+        elif tool_name == "vfs_read":
+            if self._vfs:
+                result = self._vfs.read(args["path"])
+                if result.success and result.data:
+                    return {"path": args["path"], "content": result.data.content,
+                            "kind": result.data.kind}, []
+                return {"error": result.error or "not found"}, []
+            return {"error": "VFS not available"}, []
+
+        elif tool_name == "vfs_list":
+            if self._vfs:
+                result = self._vfs.list(args.get("path", "/"))
+                if result.success:
+                    items = [{"path": n.path, "name": n.name, "kind": n.kind}
+                             for n in (result.data or [])]
+                    return {"path": args.get("path", "/"), "items": items}, []
+                return {"error": result.error or "list failed"}, []
+            return {"error": "VFS not available"}, []
+
+        elif tool_name == "vfs_search":
+            if self._vfs:
+                result = self._vfs.search(args["query"], args.get("path", "/"))
+                if result.success:
+                    items = [{"path": n.path, "name": n.name} for n in (result.data or [])]
+                    return {"query": args["query"], "results": items, "count": len(items)}, []
+                return {"error": result.error or "search failed"}, []
+            return {"error": "VFS not available"}, []
+
+        elif tool_name == "vfs_write":
+            if self._vfs:
+                result = self._vfs.write(args["path"], args["content"])
+                if result.success:
+                    return {"path": args["path"], "status": "written"}, []
+                return {"error": result.error or "write failed"}, []
+            return {"error": "VFS not available"}, []
 
         else:
             return {"error": f"Unknown tool: {tool_name}"}, []

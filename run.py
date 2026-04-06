@@ -21,6 +21,32 @@ from pathlib import Path
 
 DOCS_DIR = Path(__file__).parent / "docs"
 GRAPH_PATH = Path(__file__).parent / "data" / "graph.json"
+DATA_DIR = Path(__file__).parent / "data"
+
+
+def _create_system_fs():
+    """Create a SystemFS instance with standard mounts."""
+    from systemfs.vfs import SystemFS
+    from systemfs.resolvers.docs import DocsResolver
+    from systemfs.resolvers.graph import GraphResolver
+    from systemfs.resolvers.memory import MemoryResolver
+    from systemfs.resolvers.module import ModuleResolver
+    from systemfs.context.history import HistoryLayer
+
+    vfs = SystemFS()
+    vfs.mount("/docs/", DocsResolver(DOCS_DIR))
+    if GRAPH_PATH.exists():
+        from kgraph.graph import ConceptGraph
+        graph = ConceptGraph.load(GRAPH_PATH)
+        vfs.mount("/graph/", GraphResolver(graph))
+    vfs.mount("/context/memory/", MemoryResolver(DATA_DIR))
+    vfs.mount("/modules/", ModuleResolver())
+
+    history = HistoryLayer(DATA_DIR)
+    history.start_session()
+    vfs.attach_history(history)
+
+    return vfs
 
 
 def cmd_build(args):
@@ -84,15 +110,89 @@ def cmd_search(args):
             print(f"  ...{snippet}...")
 
 
+def cmd_vfs(args):
+    """Dispatch VFS subcommands."""
+    vfs = _create_system_fs()
+    action = args.vfs_action
+
+    if action == "list":
+        result = vfs.list(args.path or "/")
+        if result.success:
+            items = result.data or []
+            if not items:
+                print("(empty)")
+            for node in items:
+                prefix = "/" if node.kind == "directory" else " "
+                print(f"  {prefix} {node.path}")
+        else:
+            print(f"Error: {result.error}", file=sys.stderr)
+            sys.exit(1)
+
+    elif action == "read":
+        result = vfs.read(args.path)
+        if result.success and result.data:
+            print(result.data.content or "(no content)")
+        else:
+            print(f"Error: {result.error}", file=sys.stderr)
+            sys.exit(1)
+
+    elif action == "search":
+        result = vfs.search(args.query, args.path or "/")
+        if result.success:
+            items = result.data or []
+            if not items:
+                print(f"No results for '{args.query}'")
+            for node in items:
+                print(f"  {node.path}")
+        else:
+            print(f"Error: {result.error}", file=sys.stderr)
+            sys.exit(1)
+
+    elif action == "mounts":
+        mounts = vfs.list_mounts()
+        print("\nMounted resolvers:")
+        for mp, name in sorted(mounts.items()):
+            print(f"  {mp:<30} [{name}]")
+
+
+def cmd_context(args):
+    """Dispatch context subcommands."""
+    action = args.context_action
+
+    if action == "history":
+        from systemfs.context.history import HistoryLayer
+        history = HistoryLayer(DATA_DIR)
+        entries = history.query_history(limit=args.limit)
+        if not entries:
+            print("No history entries found.")
+            return
+        print(f"\nLast {len(entries)} history entries:")
+        for e in entries:
+            ts = str(e.timestamp)[:19]
+            path_str = f" [{e.path}]" if e.path else ""
+            print(f"  {ts}  [{e.event_type}] {e.actor}{path_str}")
+
+    elif action == "memory":
+        from systemfs.resolvers.memory import MemoryResolver
+        mem = MemoryResolver(DATA_DIR)
+        result = mem.list(f"/{args.type}/" if args.type else "/")
+        if result.success:
+            items = result.data or []
+            if not items:
+                print("No memory entries found.")
+            for node in items:
+                print(f"  {node.path}")
+        else:
+            print(f"Error: {result.error}", file=sys.stderr)
+
+
 def cmd_chat(args):
     from kgraph.query import GraphQuery
     from kgraph.filesystem import FileSystem
     from kgraph.agent import AgentToolkit
 
-    graph = _load_graph()
-    gq = GraphQuery(graph)
-    fs = FileSystem(DOCS_DIR)
-    agent = AgentToolkit(gq, fs)
+    vfs = _create_system_fs()
+    agent = AgentToolkit(system_fs=vfs)
 
     print("Knowledge Graph Agent (graph + filesystem hybrid)")
     print("Type your question or 'quit' to exit.\n")
@@ -185,6 +285,37 @@ def main():
     # export
     p_export = subparsers.add_parser("export", help="Print graph JSON to stdout")
     p_export.set_defaults(func=cmd_export)
+
+    # vfs subcommand group
+    p_vfs = subparsers.add_parser("vfs", help="Virtual File System operations")
+    vfs_sub = p_vfs.add_subparsers(dest="vfs_action", required=True)
+
+    p_vfs_list = vfs_sub.add_parser("list", help="List VFS directory")
+    p_vfs_list.add_argument("path", nargs="?", default="/", help="VFS path (default: /)")
+
+    p_vfs_read = vfs_sub.add_parser("read", help="Read VFS file")
+    p_vfs_read.add_argument("path", help="VFS path")
+
+    p_vfs_search = vfs_sub.add_parser("search", help="Search VFS")
+    p_vfs_search.add_argument("query", help="Search query")
+    p_vfs_search.add_argument("path", nargs="?", default="/", help="Scope path (default: /)")
+
+    p_vfs_mounts = vfs_sub.add_parser("mounts", help="List mounted resolvers")
+
+    p_vfs.set_defaults(func=cmd_vfs)
+
+    # context subcommand group
+    p_ctx = subparsers.add_parser("context", help="Context layer operations")
+    ctx_sub = p_ctx.add_subparsers(dest="context_action", required=True)
+
+    p_ctx_hist = ctx_sub.add_parser("history", help="Show recent history")
+    p_ctx_hist.add_argument("--limit", type=int, default=20, help="Max entries to show")
+
+    p_ctx_mem = ctx_sub.add_parser("memory", help="List memory entries")
+    p_ctx_mem.add_argument("type", nargs="?", choices=["fact", "episodic", "procedural"],
+                            help="Filter by memory type")
+
+    p_ctx.set_defaults(func=cmd_context)
 
     args = parser.parse_args()
     args.func(args)
