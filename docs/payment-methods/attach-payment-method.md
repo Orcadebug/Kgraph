@@ -39,6 +39,6 @@ Returns the **PaymentMethod** object with `customer` field populated.
 
 ```bash
 curl https://api.niapay.com/v1/payment_methods/pm_xyz789/attach \
-  -H "Authorization: Bearer sk_live_..." \
+  -H "Authorization: Bearer $API_KEY" \
   -d customer=cus_abc123
 ```

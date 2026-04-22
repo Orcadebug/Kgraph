@@ -40,7 +40,7 @@ Returns a **Charge** object on success.
 
 ```bash
 curl https://api.niapay.com/v1/charges \
-  -H "Authorization: Bearer sk_live_..." \
+  -H "Authorization: Bearer $API_KEY" \
   -d amount=2000 \
   -d currency=usd \
   -d customer=cus_abc123 \

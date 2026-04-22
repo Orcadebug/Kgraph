@@ -33,11 +33,11 @@ Cursor pagination uses an item's ID as the cursor rather than a page number, so 
 ```bash
 # First page
 curl "https://api.niapay.com/v1/charges?limit=10" \
-  -H "Authorization: Bearer sk_live_..."
+  -H "Authorization: Bearer $API_KEY"
 
 # Next page (use last ID from previous response)
 curl "https://api.niapay.com/v1/charges?limit=10&starting_after=ch_last_id" \
-  -H "Authorization: Bearer sk_live_..."
+  -H "Authorization: Bearer $API_KEY"
 ```
 
 ## Relationships

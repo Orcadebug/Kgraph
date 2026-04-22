@@ -7,7 +7,7 @@ All API requests are authenticated using API keys.
 Keys are scoped to your account and carry full permissions. Keep them secret.
 
 ```
-Authorization: Bearer sk_live_4xT9...
+Authorization: Bearer $API_KEY
 ```
 
 ## Key Types
@@ -35,7 +35,7 @@ Invalidates the current key and returns a new one. Triggers a `api_key.rotated` 
 Pass an `Idempotency-Key` header to safely retry requests. The key must be unique per logical operation and is valid for 24 hours.
 
 ```
-Idempotency-Key: a8098c1a-f86e-11da-bd1a-00112444be1e
+Idempotency-Key: $IDEMPOTENCY_KEY
 ```
 
 ## Concepts

@@ -44,7 +44,7 @@ Subscription cycle → Invoice created → Charge attempted → charge.succeeded
 
 ```bash
 curl https://api.niapay.com/v1/subscriptions \
-  -H "Authorization: Bearer sk_live_..." \
+  -H "Authorization: Bearer $API_KEY" \
   -d customer=cus_abc123 \
   -d price=price_monthly_pro
 ```

@@ -29,5 +29,5 @@ Returns a **Charge** object.
 
 ```bash
 curl https://api.niapay.com/v1/charges/ch_1abc23 \
-  -H "Authorization: Bearer sk_live_..."
+  -H "Authorization: Bearer $API_KEY"
 ```
