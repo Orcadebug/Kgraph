@@ -31,5 +31,5 @@ Returns a paginated list of **Charge** objects.
 
 ```bash
 curl "https://api.niapay.com/v1/charges?customer=cus_abc123&limit=5" \
-  -H "Authorization: Bearer sk_live_..."
+  -H "Authorization: Bearer $API_KEY"
 ```
