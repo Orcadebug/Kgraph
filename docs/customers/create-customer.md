@@ -35,7 +35,7 @@ Returns a **Customer** object.
 
 ```bash
 curl https://api.niapay.com/v1/customers \
-  -H "Authorization: Bearer sk_live_..." \
+  -H "Authorization: Bearer $API_KEY" \
   -d email="jane@example.com" \
   -d name="Jane Doe"
 ```
